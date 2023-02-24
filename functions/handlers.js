@@ -15,6 +15,7 @@ function handleMessage(sender_psid, received_message) {
 
         // Gets the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
+        let subtitle = `Our questionnaire is very easy to use and we're always here to help you if you have any questions. Just email us.\n\nOur Free Privacy Policy Generator can help you comply with the requirements of CCPA, CPRA, GDPR and others.\n\nOur Free Privacy Policy Generator includes several provisions and sections to help you effectively protect your customers privacy while limiting your liability, all while adhering to the guidelines of the most notable privacy laws around the world and 3rd party requirements, including:`
 
         response = {
             "attachment": {
@@ -23,7 +24,7 @@ function handleMessage(sender_psid, received_message) {
                 "template_type": "generic",
                 "elements": [{
                   "title": "Is this the right picture?",
-                  "subtitle": "Tap a button to answer.",
+                  "subtitle": subtitle,
                   "image_url": attachment_url,
                   "buttons": [
                     {
