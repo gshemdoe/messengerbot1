@@ -1,24 +1,35 @@
 const express = require('express')
+const handleMessage = require('../functions/handlers')
 const router = express.Router()
 
-router.post("/webhook", (req, res) => {
+router.post('/webhook', (req, res) => {
+
+    // Parse the request body from the POST
     let body = req.body;
 
-    console.log(`\u{1F7EA} Received webhook:`);
-    console.dir(body, { depth: null });
+    // Check the webhook event is from a Page subscription
+    if (body.object === 'page') {
 
-    // Send a 200 OK response if this is a page webhook
+        // Iterate over each entry - there may be multiple if batched
+        for (let entry of body.entry) {
+            // Get the webhook event. entry.messaging is an array, but 
+            // will only ever contain one event, so we get index 0
+            let webhook_event = entry.messaging[0];
+            console.log(webhook_event);
 
-    if (body.object === "page") {
-        // Returns a '200 OK' response to all requests
-        res.status(200).send("EVENT_RECEIVED");
+            // Get the sender PSID
+            let sender_psid = webhook_event.sender.id;
+            console.log('Sender PSID: ' + sender_psid);
+        }
 
-        // Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
+        // Return a '200 OK' response to all events
+        res.status(200).send('EVENT_RECEIVED');
+
     } else {
         // Return a '404 Not Found' if event is not from a page subscription
         res.sendStatus(404);
     }
-});
 
+});
 
 module.exports = router
