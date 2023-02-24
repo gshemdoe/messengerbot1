@@ -80,7 +80,7 @@ function callSendAPI(sender_psid, response) {
         if (!err) {
             console.log('message sent!')
         } else {
-            console.error("Unable to send message:" + err);
+            console.log(err.message)
         }
     });
 }
