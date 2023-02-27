@@ -42,7 +42,7 @@ router.get('/profile', async (req, res) => {
     "qs": { "access_token": process.env.NINA_PAGE_ACCESS_TOKEN },
     "method": "POST",
     "json": data
-  }, (err, res, body) => {
+  }, (err, response, body) => {
     if (!err) {
       console.log('message sent!')
       res.send('Data set successfully')
