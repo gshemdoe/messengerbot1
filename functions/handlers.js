@@ -69,6 +69,7 @@ async function handlePostback(sender_psid, received_postback) {
     case 'get_started':
       let udata = await user_data(sender_psid)
       response = { "text": `Welcome ${udata.first_name}` }
+      break;
 
     default:
       response = { "text": "Oops: Unknown postback" }
