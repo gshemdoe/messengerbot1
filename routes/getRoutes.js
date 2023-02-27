@@ -1,8 +1,6 @@
 const express = require('express')
 const request = require('request')
 const router = express.Router()
-const pmenu = require('../functions/pmenu')
-const wdomains = require('../functions/whitelisted')
 
 router.get('/', (req, res) => {
   res.render('home')
@@ -32,8 +30,37 @@ router.get("/webhook", (req, res) => {
 router.get('/profile', async (req, res) => {
   const data = {
     "get_started": { "payload": "get_started" },
-    pmenu,
-    wdomains
+
+    "persistent_menu": [
+      {
+        "locale": "default",
+        "composer_input_disabled": false,
+        "call_to_actions": [
+          {
+            "type": "postback",
+            "title": "Request Help",
+            "payload": "CARE_HELP"
+          },
+          {
+            "type": "postback",
+            "title": "Mode of Payment",
+            "payload": "MODE_PAYMENT"
+          },
+          {
+            "type": "web_url",
+            "title": "Visit Our Site",
+            "url": "https://dramastore.net",
+            "webview_height_ratio": "full"
+          }
+        ]
+      }
+    ],
+    
+    "whitelisted_domains": [
+      "https://dramastore.net",
+      "https://font5.net",
+    ]
+
   }
 
   // Send the HTTP request to the Messenger Platform
