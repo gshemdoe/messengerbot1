@@ -1,7 +1,8 @@
 const request = require('request')
+const axios = require('axios').default
 
 // Handles messages events
-function handleMessage(sender_psid, received_message) {
+async function handleMessage(sender_psid, received_message) {
   let response;
 
   // Check if the message contains text
@@ -45,7 +46,8 @@ function handleMessage(sender_psid, received_message) {
   }
 
   // Sends the response message
-  callSendAPI(sender_psid, response);
+  await callSendAPI(sender_psid, response);
+  console.log('message sent')
 }
 
 
@@ -102,7 +104,7 @@ function user_data(id) {
 
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
+async function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
     "recipient": {
@@ -112,18 +114,24 @@ function callSendAPI(sender_psid, response) {
   }
 
   // Send the HTTP request to the Messenger Platform
-  request({
-    "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": process.env.NINA_PAGE_ACCESS_TOKEN },
-    "method": "POST",
-    "json": request_body
-  }, (err, res, body) => {
-    if (!err) {
-      console.log('message sent!')
-    } else {
-      console.log(err.message)
-    }
-  });
+  // request({
+  //   "uri": "https://graph.facebook.com/v2.6/me/messages",
+  //   "qs": { "access_token": process.env.NINA_PAGE_ACCESS_TOKEN },
+  //   "method": "POST",
+  //   "json": request_body
+  // }, (err, res, body) => {
+  //   if (!err) {
+  //     console.log('message sent!')
+  //   } else {
+  //     console.log(err.message)
+  //   }
+  // });
+
+  await axios({
+    method: 'POST',
+    url: `https://graph.facebook.com/v2.6/me/messages/?access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`,
+    data: request_body
+  }).catch(err=> console.log(err.message))
 }
 
 module.exports = {
