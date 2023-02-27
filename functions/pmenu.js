@@ -24,5 +24,3 @@ let pmenu = {
         }
     ]
 }
-
-module.exports = pmenu

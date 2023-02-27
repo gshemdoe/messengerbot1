@@ -4,5 +4,3 @@ const wd = {
         "https://font5.net",
     ]
 }
-
-module.exports = wd
