@@ -8,9 +8,12 @@ async function handleMessage(sender_psid, received_message) {
   // Check if the message contains text
   if (received_message.text) {
 
+    //get user info
+    let user = await get_user_data(sender_psid)
+
     // Create the payload for a basic text message
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an image!`
+      "text": `Hello ${user.first_name}.\nYou sent the message: "${received_message.text}". Now send me an image!`
     }
   } else if (received_message.attachments) {
 
@@ -48,6 +51,11 @@ async function handleMessage(sender_psid, received_message) {
   // Sends the response message
   await callSendAPI(sender_psid, response);
   console.log('message sent')
+  setTimeout(()=> {
+    callSendAPI(sender_psid, {"text": 'Nimeupata ujumbe wako'})
+    .then(()=> console.log('second msg sent'))
+    .catch(()=> console.log(err.message))
+  }, 3000)
 }
 
 
@@ -69,7 +77,7 @@ async function handlePostback(sender_psid, received_postback) {
       break;
 
     case 'get_started':
-      let udata = await user_data(sender_psid)
+      let udata = await get_user_data(sender_psid)
       response = { "text": `Welcome ${udata.first_name}` }
       break;
 
@@ -78,60 +86,44 @@ async function handlePostback(sender_psid, received_postback) {
   }
 
   // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response);
+  await callSendAPI(sender_psid, response);
+  console.log('generic sent')
 }
 
 
 //get userdata
-function user_data(id) {
-  return new Promise((resolve, reject) => {
+async function get_user_data(id) {
     // Send the HTTP request to the Messenger Platform
-    request({
-      "uri": `https://graph.facebook.com/${id}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`,
-      "method": "GET",
-    }, (err, res, body) => {
-      if (!err) {
-        //convert body string received from fb to JSON object
-        body = JSON.parse(body)
-        resolve(body)
-      } else {
-        reject(err)
-        console.log(err.message)
-      }
-    });
-  })
+    let udata = await axios({
+      method: "GET",
+      url: `https://graph.facebook.com/${id}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`
+    })
+
+    //convert udata string from fb to JSON
+    udata = await JSON.parse(udata) 
 }
+
 
 
 // Sends response messages via the Send API
 async function callSendAPI(sender_psid, response) {
-  // Construct the message body
-  let request_body = {
-    "recipient": {
-      "id": sender_psid
-    },
-    "message": response
+  try {
+    // Construct the message body
+    let request_body = {
+      "recipient": {
+        "id": sender_psid
+      },
+      "message": response
+    }
+
+    await axios({
+      method: 'POST',
+      url: `https://graph.facebook.com/v2.6/me/messages/?access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`,
+      data: request_body
+    })
+  } catch (err) {
+    console.log(err.message)
   }
-
-  // Send the HTTP request to the Messenger Platform
-  // request({
-  //   "uri": "https://graph.facebook.com/v2.6/me/messages",
-  //   "qs": { "access_token": process.env.NINA_PAGE_ACCESS_TOKEN },
-  //   "method": "POST",
-  //   "json": request_body
-  // }, (err, res, body) => {
-  //   if (!err) {
-  //     console.log('message sent!')
-  //   } else {
-  //     console.log(err.message)
-  //   }
-  // });
-
-  await axios({
-    method: 'POST',
-    url: `https://graph.facebook.com/v2.6/me/messages/?access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`,
-    data: request_body
-  }).catch(err=> console.log(err.message))
 }
 
 module.exports = {
