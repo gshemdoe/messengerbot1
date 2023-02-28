@@ -1,22 +1,5 @@
 const axios = require('axios').default
 
-//get userdata
-const get_user_data = async (id) => {
-    try {
-        // Send the HTTP request to the Messenger Platform
-        await axios({
-            method: "GET",
-            url: `https://graph.facebook.com/${id}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`
-        })
-    } catch (err) {
-        console.log(err.message)
-        console.log(err)
-    }
-
-}
-
-
-
 // Sends response messages via the Send API
 const callSendAPI = async (sender_psid, response) => {
     try {
@@ -40,6 +23,5 @@ const callSendAPI = async (sender_psid, response) => {
 }
 
 module.exports = {
-    callSendAPI,
-    get_user_data
+    callSendAPI
 }

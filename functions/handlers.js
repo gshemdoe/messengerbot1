@@ -10,12 +10,14 @@ async function handleMessage(sender_psid, received_message) {
   if (received_message.text) {
 
     //get user info
-    let res = await apis.get_user_data(sender_psid)
-    console.log(res)
+    let url = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`
+    let res = await axios.get(url).catch(e => console.log(e.message))
+    let user = res.data
+    console.log(user)
 
     // Create the payload for a basic text message
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an image!`
+      "text": `Hello ${user.first_name}.\nYou sent the message: "${received_message.text}". Now send me an image!`
     }
   } else if (received_message.attachments) {
 
@@ -80,8 +82,9 @@ async function handlePostback(sender_psid, received_postback) {
 
     case 'get_started':
       //get user info
-      let res = await apis.get_user_data(sender_psid)
+      let res = await axios.get(`https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`).catch(e => console.log(e.message))
       let user = res.data
+      console.log(user)
       response = { "text": `Welcome ${user.first_name}` }
       break;
 
