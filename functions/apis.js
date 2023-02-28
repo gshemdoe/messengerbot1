@@ -8,7 +8,7 @@ const get_user_data = async (id) => {
             method: "GET",
             url: `https://graph.facebook.com/${id}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`
         })
-        console.log(udata.data)
+        //console.log(udata.data)
     } catch (err) {
         console.log(err.message)
         console.log(err)

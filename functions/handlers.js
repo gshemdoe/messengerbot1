@@ -11,11 +11,11 @@ async function handleMessage(sender_psid, received_message) {
 
     //get user info
     let user = await apis.get_user_data(sender_psid)
-    user = await JSON.parse(user.data)
+    console.log(user)
 
     // Create the payload for a basic text message
     response = {
-      "text": `Hello ${user.first_name}.\nYou sent the message: "${received_message.text}". Now send me an image!`
+      "text": `You sent the message: "${received_message.text}". Now send me an image!`
     }
   } else if (received_message.attachments) {
 
