@@ -6,7 +6,8 @@ const get_user_data = async (id) => {
         // Send the HTTP request to the Messenger Platform
         let udata = await axios({
             method: "GET",
-            url: `https://graph.facebook.com/${id}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`
+            url: `https://graph.facebook.com/${id}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`,
+            responseType: 'json'
         })
         //console.log(udata.data)
     } catch (err) {
