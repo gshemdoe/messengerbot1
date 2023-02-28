@@ -24,9 +24,10 @@ router.post('/webhook', async (req, res) => {
 
             // Check if the event is a message or postback and
             // pass the event to the appropriate handler function
-            if (webhook_event.message) {
+            //dont handle if msg is from my page
+            if (webhook_event.message && sender_psid != process.env.PAGE_ID) {
                 handles.handleMessage(sender_psid, webhook_event.message);
-            } else if (webhook_event.postback) {
+            } else if (webhook_event.postback && sender_psid != process.env.PAGE_ID) {
                 handles.handlePostback(sender_psid, webhook_event.postback);
             }
         }

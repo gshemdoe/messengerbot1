@@ -12,8 +12,7 @@ async function handleMessage(sender_psid, received_message) {
     //get user info
     let url = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`
     let res = await axios.get(url).catch(e => console.log(e.message))
-    console.log(url)
-    console.log(res)
+    console.log(res.data)
 
     // Create the payload for a basic text message
     response = {
