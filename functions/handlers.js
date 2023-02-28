@@ -98,9 +98,6 @@ async function get_user_data(id) {
       method: "GET",
       url: `https://graph.facebook.com/${id}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`
     })
-
-    //convert udata string from fb to JSON
-    udata = await JSON.parse(udata) 
 }
 
 
