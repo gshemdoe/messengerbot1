@@ -1,5 +1,6 @@
 const request = require('request')
 const axios = require('axios').default
+const apis = require('./apis')
 
 // Handles messages events
 async function handleMessage(sender_psid, received_message) {
@@ -9,7 +10,7 @@ async function handleMessage(sender_psid, received_message) {
   if (received_message.text) {
 
     //get user info
-    let user = await get_user_data(sender_psid)
+    let user = await apis.get_user_data(sender_psid)
 
     // Create the payload for a basic text message
     response = {
@@ -49,10 +50,10 @@ async function handleMessage(sender_psid, received_message) {
   }
 
   // Sends the response message
-  await callSendAPI(sender_psid, response);
+  await apis.callSendAPI(sender_psid, response);
   console.log('message sent')
   setTimeout(()=> {
-    callSendAPI(sender_psid, {"text": 'Nimeupata ujumbe wako'})
+    apis.callSendAPI(sender_psid, {"text": 'Nimeupata ujumbe wako'})
     .then(()=> console.log('second msg sent'))
     .catch(()=> console.log(err.message))
   }, 3000)
@@ -77,7 +78,7 @@ async function handlePostback(sender_psid, received_postback) {
       break;
 
     case 'get_started':
-      let udata = await get_user_data(sender_psid)
+      let udata = await apis.get_user_data(sender_psid)
       response = { "text": `Welcome ${udata.first_name}` }
       break;
 
@@ -86,45 +87,11 @@ async function handlePostback(sender_psid, received_postback) {
   }
 
   // Send the message to acknowledge the postback
-  await callSendAPI(sender_psid, response);
+  await apis.callSendAPI(sender_psid, response);
   console.log('generic sent')
-}
-
-
-//get userdata
-async function get_user_data(id) {
-    // Send the HTTP request to the Messenger Platform
-    let udata = await axios({
-      method: "GET",
-      url: `https://graph.facebook.com/${id}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`
-    })
-}
-
-
-
-// Sends response messages via the Send API
-async function callSendAPI(sender_psid, response) {
-  try {
-    // Construct the message body
-    let request_body = {
-      "recipient": {
-        "id": sender_psid
-      },
-      "message": response
-    }
-
-    await axios({
-      method: 'POST',
-      url: `https://graph.facebook.com/v2.6/me/messages/?access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`,
-      data: request_body
-    })
-  } catch (err) {
-    console.log(err.message)
-  }
 }
 
 module.exports = {
   handleMessage,
-  handlePostback,
-  callSendAPI
+  handlePostback
 }
