@@ -14,7 +14,7 @@ async function handleMessage(sender_psid, received_message) {
 
     // Create the payload for a basic text message
     response = {
-      "text": `Hello ${user.first_name}.\nYou sent the message: "${received_message.text}". Now send me an image!`
+      "text": `Hello ${user.data.first_name}.\nYou sent the message: "${received_message.text}". Now send me an image!`
     }
   } else if (received_message.attachments) {
 
@@ -78,8 +78,8 @@ async function handlePostback(sender_psid, received_postback) {
       break;
 
     case 'get_started':
-      let udata = await apis.get_user_data(sender_psid)
-      response = { "text": `Welcome ${udata.first_name}` }
+      let user = await apis.get_user_data(sender_psid)
+      response = { "text": `Welcome ${user.data.first_name}` }
       break;
 
     default:
