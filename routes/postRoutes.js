@@ -20,16 +20,20 @@ router.post('/webhook', async (req, res) => {
 
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
+            let PAGE_ID = process.env.PAGE_ID
             console.log('Sender PSID: ' + sender_psid);
 
-            // Check if the event is a message or postback and
+            // Check if the event is a message or postback and is not event of delivered
             // pass the event to the appropriate handler function
             //dont handle if msg is from my page
-            if (webhook_event.message && sender_psid != process.env.PAGE_ID) {
-                handles.handleMessage(sender_psid, webhook_event.message);
-            } else if (webhook_event.postback && sender_psid != process.env.PAGE_ID) {
-                handles.handlePostback(sender_psid, webhook_event.postback);
+            if (!webhook_event.delivery) {
+                if (webhook_event.message && sender_psid != PAGE_ID) {
+                    handles.handleMessage(sender_psid, webhook_event.message);
+                } else if (webhook_event.postback && sender_psid != PAGE_ID) {
+                    handles.handlePostback(sender_psid, webhook_event.postback);
+                }
             }
+
         }
 
         // Return a '200 OK' response to all events
