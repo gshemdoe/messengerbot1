@@ -39,27 +39,27 @@ router.get('/profile', async (req, res) => {
           {
             "type": "postback",
             "title": "Request Help",
-            "payload": "CARE_HELP"
+            "payload": "help"
           },
           {
             "type": "postback",
-            "title": "Mode of Payment",
-            "payload": "MODE_PAYMENT"
+            "title": "Fun facts",
+            "payload": "fun_fact"
           },
-          {
-            "type": "web_url",
-            "title": "Visit Our Site",
-            "url": "https://dramastore.net",
-            "webview_height_ratio": "full"
-          }
+          // {
+          //   "type": "web_url",
+          //   "title": "Visit Our Site",
+          //   "url": "https://dramastore.net",
+          //   "webview_height_ratio": "full"
+          // }
         ]
       }
     ],
     
-    "whitelisted_domains": [
-      "https://dramastore.net",
-      "https://font5.net",
-    ]
+    // "whitelisted_domains": [
+    //   "https://dramastore.net",
+    //   "https://font5.net",
+    // ]
 
   }
 
