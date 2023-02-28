@@ -35,7 +35,7 @@ async function handleMessage(sender_psid, received_message) {
     }
     else if (txt.toLowerCase().includes('help')) {
       response = {
-        "text": `Do you need help on something? Write us your concerns and we will be happy to help.\n\nYou'll be helped here and also if matter you reach us by other means:\nSkype: @regina.mchuchu255\nPhone/WhatsApp: +255 754-920-480\nEmail: regina.mchuchu@gmail.com\n\nAddress:\n145 MIGOMBANI STREET 116, \nDAR ES SALAAM, \nP.O.BOX 3354`
+        "text": `Do you need help on something? Write us your concerns and we will be happy to help.\n\nYou'll be helped here and also if matter you may reach us by other means:\nSkype: @regina.mchuchu255\nPhone/WhatsApp: +255 754-920-480\nEmail: regina.mchuchu@gmail.com\n\nAddress:\n145 MIGOMBANI STREET 116, \nDAR ES SALAAM, \nP.O.BOX 3354`
       }
     }
 
@@ -55,7 +55,7 @@ async function handleMessage(sender_psid, received_message) {
 
     // Gets the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
-    let subtitle = `Bonyeza "Ndiyo" kukubali au "Hapana" kuukataa mchongo wangu.`
+    let subtitle = `Is this right attachment`
 
     response = {
       "attachment": {
@@ -87,11 +87,11 @@ async function handleMessage(sender_psid, received_message) {
   // Sends the response message
   await apis.callSendAPI(sender_psid, response);
   console.log('message sent')
-  setTimeout(() => {
-    apis.callSendAPI(sender_psid, { "text": 'Nimeupata ujumbe wako' })
-      .then(() => console.log('second msg sent'))
-      .catch(() => console.log(err.message))
-  }, 3000)
+  // setTimeout(() => {
+  //   apis.callSendAPI(sender_psid, { "text": 'Nimeupata ujumbe wako' })
+  //     .then(() => console.log('second msg sent'))
+  //     .catch(() => console.log(err.message))
+  // }, 3000)
 }
 
 
@@ -116,7 +116,7 @@ async function handlePostback(sender_psid, received_postback) {
       //get user info
       // let res = await axios.get(`https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`).catch(e => console.log(e.message))
       // let user = res.data
-      response = { "text": `Hi there! Welcome to Regina Mchuchu page.\n\nHere we'are giving free tips about health and beauty tips.\n\nDid you know? Instead of smearing your face with a serum containing vitamin C, you can just eat an orange or other citrus fruit every day and probably not require any product. \n\nRegina Mchuchu is here to provide health tips about beauty. If you have a question or any concern don't this is a right plce to clear it.` }
+      response = { "text": `Hi there! Welcome to Regina Mchuchu page.\n\nHere we'are giving free tips about health and beauty tips.\n\nDid you know? Instead of smearing your face with a serum containing vitamin C, you can just eat an orange or other citrus fruit every day and probably not require any product. \n\nRegina Mchuchu is here to provide health tips about beauty. If you have a question or any concern this is a right place to clear it.` }
       break;
 
     case 'help':
