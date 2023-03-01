@@ -15,7 +15,7 @@ const funs = [
 
 // Handles messages events
 async function handleMessage(sender_psid, received_message) {
-  let response;
+  //let response;
 
   // Check if the message contains text
   if (received_message.text) {
@@ -29,31 +29,23 @@ async function handleMessage(sender_psid, received_message) {
 
     let txt = received_message.text
     if (txt.toLowerCase().includes('hello')) {
-      response = {
+      let response = {
         "text": `Hello! How are you?\nThis is Regina Mchuchu, how may I help you?`
       }
+      await apis.callSendAPI(sender_psid, response);
+      console.log('message sent')
     }
+
     else if (txt.toLowerCase().includes('help')) {
-      response = {
+      let response = {
         "text": `Do you need help on something? Write us your concerns and we will be happy to help.\n\nYou'll be helped here and also if matter you may reach us by other means:\nSkype: @regina.mchuchu255\nPhone/WhatsApp: +255 754-920-480\nEmail: regina.mchuchu@gmail.com\n\nAddress:\n145 MIGOMBANI STREET 116, \nDAR ES SALAAM, \nP.O.BOX 3354`
       }
+      await apis.callSendAPI(sender_psid, response);
     }
 
     else if (txt.toLowerCase().includes('mkeka')) {
-      response = {
-        "attachment": {
-          "type": "image",
-          "payload": {
-            "url": "https://scontent.xx.fbcdn.net/v/t1.15752-9/332785860_110865141882030_178115573546292529_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=58c789&_nc_ohc=M6WlI4ooNP8AX9JvSLs&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRU4qi3YI70Wprh7m77leaMEa3BtYzwohJ50CN4r-5c9A&oe=6426EE90",
-            "is_reusable": true
-          }
-        }
-      }
-    }
-
-    else if (txt.toLowerCase().includes('btn')) {
       let txt = `Baada ya kumtembezea Mhindi kisago jana, leo tena tuendeleze bakora mpaka aombe poo!\n\nTunaingia mjini kihivi:\n\n#1) Eintracht - SSC Napoli\n---> GG & U/O 2.5: "GG&O"\n• Both teams to score (timu zote zifungane) na mechi itoke over 2.5\n\n\n#2). Liverpool - Real Madrid \n---> First 10 minutes: Draw "X"\n• Draw dakika 10 za mwanzo.\n\n\n#3). Norwich City - Birmingham \n---> 1st Half: First team to score - "1"\n• Goli la kwanza kipindi cha kwanza litafungwa na Norwich City\n\n▬▬▬▬▬▬▬▬\n\nHizi options zinapatikana Gal Sport Betting, kama bado huna account.`
-      response = {
+      let response2 = {
         "attachment": {
           "type": "template",
           "payload": {
@@ -69,18 +61,46 @@ async function handleMessage(sender_psid, received_message) {
           }
         }
       }
+
+      // Sends the response message
+      let response1 = {
+        "attachment": {
+          "type": "image",
+          "payload": {
+            "url": "https://scontent.xx.fbcdn.net/v/t1.15752-9/332785860_110865141882030_178115573546292529_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=58c789&_nc_ohc=M6WlI4ooNP8AX9JvSLs&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRU4qi3YI70Wprh7m77leaMEa3BtYzwohJ50CN4r-5c9A&oe=6426EE90",
+            "is_reusable": true
+          }
+        }
+      }
+
+      // Sends the response message
+      await apis.callSendAPI(sender_psid, response1);
+      console.log('image sent')
+      setTimeout(() => {
+        apis.callSendAPI(sender_psid, response2)
+          .then(() => console.log('message 2 sent'))
+          .catch(e => console.log(e.message))
+      }, 1000)
     }
 
     else if (txt.toLowerCase() == 'hi' || txt.toLowerCase() == 'hi!') {
       response = {
         "text": `Hi there! What can I help you with?`
       }
+
+      // Sends the response message
+      await apis.callSendAPI(sender_psid, response);
+      console.log('message sent')
     }
 
     else {
-      response = {
+      let response = {
         "text": `Thank you for reaching us. We got your message ("${received_message.text}"). We will get in contact with you soon!`
       }
+
+      // Sends the response message
+      await apis.callSendAPI(sender_psid, response);
+      console.log('message sent')
     }
 
   } else if (received_message.attachments) {
@@ -94,7 +114,7 @@ async function handleMessage(sender_psid, received_message) {
     let title = `Mkeka wa Leo [${tdate}]`
     console.log(new Date().toLocaleTimeString())
 
-    response = {
+    let response = {
       "attachment": {
         "type": "template",
         "payload": {
@@ -119,16 +139,11 @@ async function handleMessage(sender_psid, received_message) {
         }
       }
     }
-  }
 
-  // Sends the response message
-  await apis.callSendAPI(sender_psid, response);
-  console.log('message sent')
-  // setTimeout(() => {
-  //   apis.callSendAPI(sender_psid, { "text": 'Nimeupata ujumbe wako' })
-  //     .then(() => console.log('second msg sent'))
-  //     .catch(() => console.log(err.message))
-  // }, 3000)
+    // Sends the response message
+    await apis.callSendAPI(sender_psid, response);
+    console.log('message sent')
+  }
 }
 
 
