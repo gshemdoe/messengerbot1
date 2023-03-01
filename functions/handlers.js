@@ -39,6 +39,58 @@ async function handleMessage(sender_psid, received_message) {
       }
     }
 
+    else if (txt.toLowerCase().includes('mkeka')) {
+      response = {
+        "attachment": {
+          "type": "image",
+          "payload": {
+            "url": "https://scontent.xx.fbcdn.net/v/t1.15752-9/332785860_110865141882030_178115573546292529_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=58c789&_nc_ohc=M6WlI4ooNP8AX9JvSLs&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRU4qi3YI70Wprh7m77leaMEa3BtYzwohJ50CN4r-5c9A&oe=6426EE90",
+            "is_reusable": true
+          }
+        }
+      }
+    }
+
+    else if (txt.toLowerCase().includes('btn')) {
+      let txt = `Baada ya kumtembezea Mhindi kisago jana, leo tena tuendeleze bakora mpaka aombe poo!.
+
+      Tunaingia mjini kihivi:
+      
+      #1) Eintracht - SSC Napoli
+      ---> GG & U/O 2.5: "GG&O"
+      • Both teams to score (timu zote zifungane) na mechi itoke over 2.5
+      
+      
+      #2). Liverpool - Real Madrid 
+      ---> First 10 minutes: Draw "X"
+      • Draw dakika 10 za mwanzo.
+      
+      
+      #3). Norwich City - Birmingham 
+      ---> 1st Half: First team to score - "1"
+      • Goli la kwanza kipindi cha kwanza litafungwa na Norwich City
+      
+      ▬▬▬▬▬▬▬▬
+      
+      Hizi options zinapatikana Gal Sport Betting, kama bado huna account.`
+      response = {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "button",
+            "text": txt,
+            "buttons": [
+              {
+                "type": "web_url",
+                "url": "https://mkekawaleo.com",
+                "title": "BET SASA"
+              },
+            ]
+          }
+        }
+      }
+    }
+
     else if (txt.toLowerCase() == 'hi' || txt.toLowerCase() == 'hi!') {
       response = {
         "text": `Hi there! What can I help you with?`
@@ -56,7 +108,7 @@ async function handleMessage(sender_psid, received_message) {
     // Gets the URL of the message attachment
     //upload this attachment url to the db
     let attachment_url = received_message.attachments[0].payload.url;
-    console.log("att url is: "+attachment_url)
+    console.log("att url is: " + attachment_url)
     let subtitle = `Leo tunatembea na option ya under 45.5 throwns. Hii inamaana mipira ya kurushwa isizidi 45 match nzima au kipindi cha kwanza. Bonyeza button hapo chini kujisajili`
     let tdate = new Date().toLocaleDateString('en-us')
     let title = `Mkeka wa Leo [${tdate}]`
