@@ -52,27 +52,7 @@ async function handleMessage(sender_psid, received_message) {
     }
 
     else if (txt.toLowerCase().includes('btn')) {
-      let txt = `Baada ya kumtembezea Mhindi kisago jana, leo tena tuendeleze bakora mpaka aombe poo!.
-
-      Tunaingia mjini kihivi:
-      
-      #1) Eintracht - SSC Napoli
-      ---> GG & U/O 2.5: "GG&O"
-      • Both teams to score (timu zote zifungane) na mechi itoke over 2.5
-      
-      
-      #2). Liverpool - Real Madrid 
-      ---> First 10 minutes: Draw "X"
-      • Draw dakika 10 za mwanzo.
-      
-      
-      #3). Norwich City - Birmingham 
-      ---> 1st Half: First team to score - "1"
-      • Goli la kwanza kipindi cha kwanza litafungwa na Norwich City
-      
-      ▬▬▬▬▬▬▬▬
-      
-      Hizi options zinapatikana Gal Sport Betting, kama bado huna account.`
+      let txt = `Baada ya kumtembezea Mhindi kisago jana, leo tena tuendeleze bakora mpaka aombe poo!\n\nTunaingia mjini kihivi:\n\n#1) Eintracht - SSC Napoli\n---> GG & U/O 2.5: "GG&O"\n• Both teams to score (timu zote zifungane) na mechi itoke over 2.5\n\n\n#2). Liverpool - Real Madrid \n---> First 10 minutes: Draw "X"\n• Draw dakika 10 za mwanzo.\n\n\n#3). Norwich City - Birmingham \n---> 1st Half: First team to score - "1"\n• Goli la kwanza kipindi cha kwanza litafungwa na Norwich City\n\n▬▬▬▬▬▬▬▬\n\nHizi options zinapatikana Gal Sport Betting, kama bado huna account.`
       response = {
         "attachment": {
           "type": "template",
