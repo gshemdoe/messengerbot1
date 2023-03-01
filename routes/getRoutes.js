@@ -38,28 +38,28 @@ router.get('/profile', async (req, res) => {
         "call_to_actions": [
           {
             "type": "postback",
-            "title": "Request Help",
-            "payload": "help"
+            "title": "Mkeka wa Leo",
+            "payload": "mkeka"
           },
           {
-            "type": "postback",
-            "title": "Fun facts",
-            "payload": "fun_fact"
+            "type": "web_url",
+            "title": "Mikeka yetu ya kila siku",
+            "url": "https://mkekawaleo.com/",
+            "webview_height_ratio": "full"
           },
-          // {
-          //   "type": "web_url",
-          //   "title": "Visit Our Site",
-          //   "url": "https://dramastore.net",
-          //   "webview_height_ratio": "full"
-          // }
+          {
+            "type": "web_url",
+            "title": "Ofa ya 200% parimatch",
+            "url": "https://mkekawaleo.com/pmatch/register",
+            "webview_height_ratio": "full"
+          }
         ]
       }
     ],
     
-    // "whitelisted_domains": [
-    //   "https://dramastore.net",
-    //   "https://font5.net",
-    // ]
+    "whitelisted_domains": [
+      "https://mkekawaleo.com/"
+    ]
 
   }
 

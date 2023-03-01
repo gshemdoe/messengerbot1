@@ -113,9 +113,6 @@ async function handlePostback(sender_psid, received_postback) {
       break;
 
     case 'get_started':
-      //get user info
-      // let res = await axios.get(`https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`).catch(e => console.log(e.message))
-      // let user = res.data
       response = { "text": `Hi there! Welcome to Regina Mchuchu page.\n\nHere we'are giving free tips about health and beauty tips.\n\nDid you know? Instead of smearing your face with a serum containing vitamin C, you can just eat an orange or other citrus fruit every day and probably not require any product. \n\nRegina Mchuchu is here to provide health tips about beauty. If you have a question or any concern this is a right place to clear it.` }
       break;
 
