@@ -80,7 +80,7 @@ async function handleMessage(sender_psid, received_message) {
         apis.callSendAPI(sender_psid, response2)
           .then(() => console.log('message 2 sent'))
           .catch(e => console.log(e.message))
-      }, 1000)
+      }, 500)
     }
 
     else if (txt.toLowerCase() == 'hi' || txt.toLowerCase() == 'hi!') {
