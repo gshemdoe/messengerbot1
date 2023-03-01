@@ -54,9 +54,13 @@ async function handleMessage(sender_psid, received_message) {
   } else if (received_message.attachments) {
 
     // Gets the URL of the message attachment
+    //upload this attachment url to the db
     let attachment_url = received_message.attachments[0].payload.url;
     console.log("att url is: "+attachment_url)
-    let subtitle = `Is this right attachment`
+    let subtitle = `Leo tunatembea na option ya under 45.5 throwns. Hii inamaana mipira ya kurushwa isizidi 45 match nzima au kipindi cha kwanza. Bonyeza button hapo chini kujisajili`
+    let tdate = new Date().toLocaleDateString('en-us')
+    let title = `Mkeka wa Leo [${tdate}]`
+    console.log(new Date().toLocaleTimeString())
 
     response = {
       "attachment": {
@@ -64,19 +68,19 @@ async function handleMessage(sender_psid, received_message) {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "Kabla ya yote. Je! uko tayari kupokea mchongo wangu wa leo.",
+            "title": title,
             "subtitle": subtitle,
             "image_url": attachment_url,
             "buttons": [
+              // {
+              //   "type": "postback",
+              //   "title": "Ndiyo",
+              //   "payload": "yes",
+              // },
               {
-                "type": "postback",
-                "title": "Ndiyo",
-                "payload": "yes",
-              },
-              {
-                "type": "postback",
-                "title": "Hapana",
-                "payload": "no",
+                "type": "web_url",
+                "title": "Jisajili Sasa",
+                "url": "https://mkekawaleo.com/pmatch/register",
               }
             ],
           }]
