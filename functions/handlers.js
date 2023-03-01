@@ -70,7 +70,7 @@ async function handleMessage(sender_psid, received_message) {
           "elements": [{
             "title": title,
             "subtitle": subtitle,
-            "image_url": attachment_url,
+            "image_url": `https://scontent.xx.fbcdn.net/v/t1.15752-9/332785860_110865141882030_178115573546292529_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=58c789&_nc_ohc=M6WlI4ooNP8AX9JvSLs&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRU4qi3YI70Wprh7m77leaMEa3BtYzwohJ50CN4r-5c9A&oe=6426EE90`,
             "buttons": [
               // {
               //   "type": "postback",
