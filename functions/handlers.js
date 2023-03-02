@@ -84,6 +84,7 @@ async function handleMessage(sender_psid, received_message) {
     let response = {
       "text": `Ujumbe wako umepokelewa\n\nImg URL: ${attachment_url}`
     }
+    await apis.callSendAPI(sender_psid, response)
   }
 }
 
