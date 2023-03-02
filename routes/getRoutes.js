@@ -39,7 +39,7 @@ router.get('/profile', async (req, res) => {
           {
             "type": "postback",
             "title": "Mkeka wa Leo",
-            "payload": "mkeka"
+            "payload": "ndiyo"
           },
           {
             "type": "web_url",
@@ -49,7 +49,7 @@ router.get('/profile', async (req, res) => {
           },
           {
             "type": "web_url",
-            "title": "Ofa ya 200% parimatch",
+            "title": "Ofa ya 200%",
             "url": "https://mkekawaleo.com/pmatch/register",
             "webview_height_ratio": "full"
           }
