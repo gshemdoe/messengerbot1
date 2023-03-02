@@ -116,7 +116,7 @@ async function handlePostback(sender_psid, received_postback) {
             "type": "template",
             "payload": {
               "template_type": "button",
-              "text": mkeka.maelezo,
+              "text": mkeka.maelezo.replace(/\\\\r\\/g, ''),
               "buttons": [
                 {
                   "type": "web_url",
