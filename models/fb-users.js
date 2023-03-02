@@ -7,6 +7,6 @@ const fbUsersSchema = new Schema({
     }
 }, {timestamps: true, strict: false})
 
-const model = mongoose.model(fb_users_model, fbUsersSchema)
+const model = mongoose.model("fb_users_model", fbUsersSchema)
 
 module.exports = model

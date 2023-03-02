@@ -13,6 +13,6 @@ const fbMikeka = new Schema({
     }
 }, {timestamps: true, strict: false})
 
-const model = mongoose.model(fb_mikeka_model, fbMikeka)
+const model = mongoose.model("fb_mikeka_model", fbMikeka)
 
 module.exports = model
