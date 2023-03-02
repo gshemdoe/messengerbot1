@@ -101,6 +101,7 @@ async function handlePostback(sender_psid, received_postback) {
     case 'ndiyo':
       let td = new Date().toLocaleDateString('en-GB', { timeZone: 'Africa/Nairobi' })
       let mkeka = await pm_mikeka.findOne({ siku: td })
+      let maelezo = mkeka.maelezo.replace(/\\r/g, '')
       if (mkeka) {
         let res1 = {
           "attachment": {
@@ -116,7 +117,7 @@ async function handlePostback(sender_psid, received_postback) {
             "type": "template",
             "payload": {
               "template_type": "button",
-              "text": mkeka.maelezo.replace(/\\\\r\\/g, ''),
+              "text": maelezo,
               "buttons": [
                 {
                   "type": "web_url",
