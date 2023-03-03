@@ -101,8 +101,8 @@ async function handlePostback(sender_psid, received_postback) {
     case 'ndiyo':
       let td = new Date().toLocaleDateString('en-GB', { timeZone: 'Africa/Nairobi' })
       let mkeka = await pm_mikeka.findOne({ siku: td })
-      let maelezo = mkeka.maelezo.replace(/\\r/g, '')
       if (mkeka) {
+        let maelezo = mkeka.maelezo.replace(/\\r/g, '')
         let res1 = {
           "attachment": {
             "type": "image",
@@ -134,7 +134,7 @@ async function handlePostback(sender_psid, received_postback) {
         await delay(500)
         await apis.callSendAPI(sender_psid, res2)
       } else {
-        response = { "text": "Samahani! Kwasasa bado hatujaandaa mkeka wa leo, tafadhali rudi tena baada ya muda kidogo." }
+        response = { "text": "Samahani! Kwasasa bado hatujaandaa mkeka wa leo, tafadhali rudi tena baada ya muda kidogo.\n\nUnaweza ukaangalia mikeka yetu ya kila siku hapa https://mkekawaleo.com" }
         await apis.callSendAPI(sender_psid, response);
       }
       break;
