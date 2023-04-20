@@ -37,9 +37,10 @@ router.get('/profile', async (req, res) => {
         "composer_input_disabled": false,
         "call_to_actions": [
           {
-            "type": "postback",
+            "type": "web_url",
             "title": "Mkeka wa Leo",
-            "payload": "ndiyo"
+            "url": "https://mkekawaleo.com/",
+            "webview_height_ratio": "full"
           },
           {
             "type": "web_url",
@@ -49,7 +50,7 @@ router.get('/profile', async (req, res) => {
           },
           {
             "type": "web_url",
-            "title": "Ofa ya 200%",
+            "title": "Pata Ofa ya 200%",
             "url": "https://mkekawaleo.com/pmatch/register",
             "webview_height_ratio": "full"
           }
