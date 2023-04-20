@@ -13,7 +13,7 @@ const callSendAPI = async (sender_psid, response) => {
 
         await axios({
             method: 'POST',
-            url: `https://graph.facebook.com/v2.6/me/messages/?access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`,
+            url: `https://graph.facebook.com/v16.0/me/messages/?access_token=${process.env.NINA_PAGE_ACCESS_TOKEN}`,
             data: request_body
         })
     } catch (err) {
